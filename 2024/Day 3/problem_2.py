@@ -1,11 +1,11 @@
 import re 
-def get_search_indicies(pattern):
+def get_search_indicies(pattern, is_start = False):
         # Get positions of dos
     search_result = re.search(pattern, line)
     string_pos = list()
     search_start = 0
     indicies_total = 0
-    if pattern == "do\(\)":
+    if is_start:
         string_pos.append(0)
     while search_result is not None:
         search_result = re.search(pattern, line[indicies_total:])
@@ -33,10 +33,14 @@ f = open("2024\Day 3\\input_2.txt", "r")
 total_safe_reports = 0
 total_enabled = 0
 total_disabled = 0
-
+do_cmd = list()
+dont_cmd = list()
 for line in f:
     
-    do_cmd = get_search_indicies("do\(\)")
+    if len(do_cmd) is 0:
+        do_cmd = get_search_indicies("do\(\)", True)
+    else:
+        do_cmd = get_search_indicies("do\(\)")
     dont_cmd = get_search_indicies("don't\(\)")
 
 
@@ -47,6 +51,16 @@ for line in f:
         else:
             nums = re.findall("[0-9]+", line[command.start(): command.end()])
             total_disabled += (int(nums[0]) * int(nums[1]))
+
+    
+    last_do = do_cmd[-1]
+    last_dont = dont_cmd[-1]
+
+    do_cmd = list()
+    dont_cmd = list()
+    do_cmd.append(last_do)
+    dont_cmd.append(last_dont)
+
     print(f"Total enabled is :{total_enabled}")   
     print(f"Total disabled is :{total_disabled}")  
     print(f"Total added together is {total_enabled + total_disabled}")
