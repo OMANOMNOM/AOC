@@ -1,4 +1,5 @@
 import re 
+
 def get_search_indicies(pattern):
         # Get positions of dos
     search_result = re.search(pattern, line)
@@ -26,23 +27,19 @@ def get_highest_index_below_value(index, cur_list):
     
     return cur_val
 
+# Main
 # Read in the entire file, row by row. 
-f = open("2024\Day 3\\input_2.txt", "r")
-
-
 total_safe_reports = 0
 total_enabled = 0
 total_disabled = 0
 
+f = open("2024\Day 3\\input_2.txt", "r")
 line = ""
 for l in f:
     line += l
-
-
     
 do_cmd = get_search_indicies("do\(\)")
 dont_cmd = get_search_indicies("don't\(\)")
-
 
 for command in re.finditer("mul\(\d{1,3},\d{1,3}\)", line):
     if get_highest_index_below_value(command.start(), do_cmd) > get_highest_index_below_value(command.start(), dont_cmd):
@@ -55,6 +52,3 @@ print(f"Total enabled is :{total_enabled}")
 print(f"Total disabled is :{total_disabled}")  
 print(f"Total added together is {total_enabled + total_disabled}")
 print(f"We are off by {162813399 - (total_enabled + total_disabled)}") 
-
-# print(total)
-
