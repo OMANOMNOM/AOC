@@ -1,5 +1,5 @@
 def read_map():
-    file = open("2024\Day 6\\test_input_1.txt", "r")
+    file = open("2024\\Day 6\\test_input_1.txt", "r")
     matrix = list()
     for row in file:
         temp = list()
@@ -19,7 +19,7 @@ def get_init_guard_pos():
                     return guard_pos, guard_cur_symbol    
 
 def debug_print(matrix):
-    file = open("2024\Day 6\\debug_input_1.txt", "w")
+    file = open("2024\\Day 6\\debug_input_1.txt", "w")
     for row in matrix:
         s_row = ""
         for column in row:
