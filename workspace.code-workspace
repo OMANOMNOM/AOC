@@ -3,5 +3,9 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"github.copilot.chat.agent.currentEditorContext.enabled": true,
+		"github.copilot.chat.alternateGptPrompt.enabled": true
+	}
 }
